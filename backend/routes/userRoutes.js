@@ -3,7 +3,7 @@ const router = express.Router();
 const {register, profile,login,getUserDetails,logout} = require('../controllers/userController');
 const { authenticateUser } = require('../middleware/authentication');
 
-const { addSnippet ,getAllSnippet,getSnip, addSnippetOther,updateSnippet, dropSnippet}=require('../controllers/snippetController');
+const { addSnippet ,getAllSnippet,getSnip, addSnippetOther,updateSnippet, dropSnippet, Search}=require('../controllers/snippetController');
 
 
 
@@ -19,5 +19,6 @@ router.route('/snippet/get').get(getAllSnippet);
 router.route("/snippet/get/:id").get(getSnip);
 router.route('/snippet/update/:id').post(updateSnippet);
 router.route('/snippet/delete/:id').delete(dropSnippet);
+
 
 module.exports = router;  
