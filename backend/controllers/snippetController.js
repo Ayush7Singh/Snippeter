@@ -91,7 +91,6 @@ exports.dropSnippet =async(req,res)=>{
   try {
     const id= req.params.id;
     const resi = await Snippet.findByIdAndDelete(id);
-    console.log(resi);
     if (resi) {
       return res.json({
         success:true,

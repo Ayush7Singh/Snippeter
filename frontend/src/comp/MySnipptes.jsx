@@ -17,7 +17,7 @@ export default function MySnipptes() {
   const handler = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:4000/snippet/delete/${id}`,
+        `http://localhost:4000/api/v1/snippet/delete/${id}`,
         { withCredentials: true }
       );
       toast.success("Deleted Successfully!");
