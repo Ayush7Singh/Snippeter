@@ -1,17 +1,19 @@
 import axios from 'axios';
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const navigate = useNavigate('/');
   const {isAuth,user} = useSelector((store) => store.user);
   const dispatch = useDispatch();
-  const handler = ()=>{
+  const handler = async ()=>{
     try{
-      const {data} = axios.get('/user/logout',{withCredentials: true});
+      const { data } = await axios.get('/user/logout',{withCredentials: true});
       dispatch({
         type : "LOGOUT_USER"
       })
+      navigate('/')
     }catch(err){
       console.log(err);
     }
@@ -22,10 +24,14 @@ export default function Header() {
       <header class="text-gray-400 bg-gray-900 body-font">
       <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
-          <Link to="/create/snippet" class="mr-5 hover:text-white">Create Snip</Link>
-          <a class="mr-5 hover:text-white">My Snip</a>
-          <a class="mr-5 hover:text-white">Default Snip</a>
-          <a class="mr-5 hover:text-white">Add Snip</a>
+          {isAuth && (
+            <>
+            <Link to="/create/snippet" class="mr-5 hover:text-white">Create Snip</Link>
+            <Link to="/" class="mr-5 hover:text-white">My Snip</Link>
+            <a class="mr-5 hover:text-white">Default Snip</a>
+            <a class="mr-5 hover:text-white">Add Snip</a>
+            </>
+          )}
         </nav>
         <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-white lg:items-center lg:justify-center mb-4 md:mb-0">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-orange-500">

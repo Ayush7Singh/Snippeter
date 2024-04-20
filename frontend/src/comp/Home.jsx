@@ -26,7 +26,6 @@ export default function Home() {
           type : USER_REGISTER_SUCCESS,
           payload : data.user
         })
-        navigate('/');
       } catch (error) {
         dispatch({
           type : USER_REGISTER_FAIL
@@ -44,7 +43,6 @@ export default function Home() {
           type : USER_LOGIN_SUCCESS,
           payload : data.user
         })
-        navigate('/');
       } catch (error) {
         dispatch({
           type : USER_LOGIN_FAIL
@@ -56,7 +54,7 @@ export default function Home() {
 
   useEffect(()=>{
     if(user != null){
-      navigate('/')
+      navigate('/home')
     }
   },[isAuth,navigate])
   return (

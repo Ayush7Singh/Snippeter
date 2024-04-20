@@ -30,8 +30,8 @@ function App() {
     <Router >
       <Header />
         <Routes>
-          <Route path='/' element={<MySnipptes/>} />
-          <Route path="/user/auth" element={<Home />} />
+          <Route path='/home' element={<MySnipptes/>} />
+          <Route path="/" element={<Home />} />
           <Route path="/create/snippet" element={<CreateSnippet />} />
         </Routes>
       <Footer />

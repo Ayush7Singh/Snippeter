@@ -9,4 +9,4 @@ router.route('/user/logout').get(logout);
 router.route('/profile').get(authenticateUser,profile);
 router.route("/me").get(authenticateUser, getUserDetails);
 
-module.exports = router;
+module.exports = router;  
