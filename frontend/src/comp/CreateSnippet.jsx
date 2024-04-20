@@ -26,6 +26,8 @@ export default function CreateSnippet() {
   }
 
   return (
+    <>
+    <MedAi/>
     <div>
       <section class="text-gray-400 bg-gray-900 body-font relative">
   <div class="container px-5 py-24 mx-auto">
@@ -62,5 +64,6 @@ export default function CreateSnippet() {
 </section>
 <ToastContainer />
     </div>
+    </>
   )
 }
