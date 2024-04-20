@@ -53,7 +53,7 @@ export default function Home() {
   const {isAuth,user} = useSelector((store) => store.user);
 
   useEffect(()=>{
-    if(user != null){
+    if(isAuth){
       navigate('/home')
     }
   },[isAuth,navigate])

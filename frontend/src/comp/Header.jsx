@@ -9,7 +9,7 @@ export default function Header() {
   const dispatch = useDispatch();
   const handler = async ()=>{
     try{
-      const { data } = await axios.get('/user/logout',{withCredentials: true});
+      const { data } = await axios.get('http://localhost:4000/api/v1/user/logout',{withCredentials: true});
       dispatch({
         type : "LOGOUT_USER"
       })
@@ -28,8 +28,8 @@ export default function Header() {
             <>
             <Link to="/create/snippet" class="mr-5 hover:text-white">Create Snip</Link>
             <Link to="/" class="mr-5 hover:text-white">My Snip</Link>
+            <Link to='/add/snippet' class="mr-5 hover:text-white">Add Snip</Link>
             <a class="mr-5 hover:text-white">Default Snip</a>
-            <a class="mr-5 hover:text-white">Add Snip</a>
             </>
           )}
         </nav>

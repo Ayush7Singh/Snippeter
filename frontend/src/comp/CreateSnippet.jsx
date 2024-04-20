@@ -5,7 +5,6 @@ import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function CreateSnippet() {
-
   const [name, setname] = useState("")
   const [lan,setlan] = useState("");
   const [code,setcode] = useState("");
@@ -15,15 +14,14 @@ export default function CreateSnippet() {
      
       const {data}  =await axios.post("http://localhost:4000/api/v1/snippet/create",{name,lan,code}, { withCredentials: true});
       if(data.success){
-       
         toast.success("Success");
         setcode("");
         setlan("");
         setname("");
-       
+        toast.success("Created Successfully!");
       }
     } catch (error) {
-     
+      toast.error(error.response.data.message)
     }
   }
 

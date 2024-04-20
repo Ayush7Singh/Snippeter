@@ -73,7 +73,25 @@ exports.dropSnippet =async(req,res)=>{
   }
 };
 
-
+exports.addSnippetOther = async(req,res)=>{
+  try {
+    const {name, id} = req.body;
+    const oldSnip = await Snippet.findById(id);
+    const newSnip = await Snippet.create({
+      name, lan : oldSnip.lan, code : oldSnip.code
+    })
+    return res.status(200).json({
+      messsage : "Added Successfully",
+      success : true,
+    })
+  } catch (error) {
+    console.log(error);
+      res.status(500).json({
+          success:false,
+          message:error
+      })
+  }
+}
 
 
 
