@@ -29,6 +29,7 @@ export default function Header() {
             <Link to="/create/snippet" class="mr-5 hover:text-white">Create Snip</Link>
             <Link to="/" class="mr-5 hover:text-white">My Snip</Link>
             <Link to='/add/snippet' class="mr-5 hover:text-white">Add Snip</Link>
+            <Link to='/update/snippet/6623562ce30016eb717c8d1e' class="mr-5 hover:text-white">Edit Snip</Link>
             <a class="mr-5 hover:text-white">Default Snip</a>
             </>
           )}
