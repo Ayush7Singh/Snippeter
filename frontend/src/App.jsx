@@ -9,6 +9,8 @@ import Home from "./comp/Home.jsx";
 import MySnipptes from "./comp/MySnipptes.jsx";
 import CreateSnippet from "./comp/CreateSnippet.jsx";
 import AddOthers from "./comp/AddOthers.jsx";
+import UpdateSnippet from "./comp/Updatesnippet.jsx"
+
 function App() {
   const dispatch = useDispatch();
   useEffect(()=>async()=>{
@@ -34,6 +36,7 @@ function App() {
           <Route path='/home' element={<MySnipptes/>} />
           <Route path="/" element={<Home />} />
           <Route path='/add/snippet' element={<AddOthers/>} />
+          <Route path='/update/snippet/:id' element={<UpdateSnippet/>} />
           <Route path="/create/snippet" element={<CreateSnippet />} />
         </Routes>
       <Footer />

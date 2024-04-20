@@ -1,4 +1,5 @@
 const Snippet =  require('../models/Snippet');
+const mongoose = require('mongoose')
 
 exports.addSnippet = async (req, res) => {
   try {
@@ -42,13 +43,41 @@ exports.getAllSnippet = async (req, res) => {
   }
 };
 
+exports.getSnip = async (req, res) => {
+  try {
+    const id= req.params.id;
+    console.log(id)
+    const resi = await Snippet.findById(id);
+    console.log(resi);
+    if (resi) {
+      return res.json(resi);
+    }
+    else{
+      console.log("No snippet exist"); 
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success : false,
+      message : error
+    })
+  }
+};
 exports.updateSnippet =async(req,res)=>{
   try{
-    const {id , ntext} = req.body();
+    const id= req.params.id;
+    const {name,lan, code} = req.body;
     const updatedSnippet = await Snippet.findById(id);
-    updatedSnippet.code=ntext;
+    console.log(updatedSnippet)
+    updatedSnippet.code=code;
+    updatedSnippet.lan=lan;
+    updatedSnippet.name=name;
     await updatedSnippet.save();
-    console.log("updated sucesss");
+    res.status(500).json({
+      success:true,
+      message:"Updated Successfully",
+      updatedSnippet
+  })
   }catch(error){
       console.log(error);
       res.status(500).json({
@@ -59,16 +88,26 @@ exports.updateSnippet =async(req,res)=>{
 };
 
 exports.dropSnippet =async(req,res)=>{
-  try{
-    const {id} = req.body();
-    const dSnippet = await Snippet.DeleteOne(id);
-    console.log("deleted sucesss");
-  }catch(error){
-      console.log(error);
-      res.status(500).json({
-          success:false,
-          message:error
-      })
+  try {
+    const id= req.params.id;
+    const resi = await Snippet.findByIdAndDelete(id);
+    console.log(resi);
+    if (resi) {
+      return res.json({
+        success:true,
+          message:"Deleted Successfully",
+          resi
+      });
+    }
+    else{
+      console.log("No snippet exist"); 
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success : false,
+      message : error
+    })
   }
 };
 
