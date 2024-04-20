@@ -7,7 +7,7 @@ export default function MySnipptes() {
   const {isAuth,user} = useSelector((store) => store.user);
 
   useEffect(()=>{
-    if(!user){
+    if(isAuth===false){
       navigate('/')
     }
   },[isAuth,navigate])

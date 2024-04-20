@@ -88,4 +88,36 @@ exports.getUserDetails = async(req,res,next)=>{
         user,
     })
 
+  
 }
+
+exports.createSnippet = async (req, res, next) => {
+  try {
+    const { name, email, snip } = req.body;
+    const existingUser =await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User already exists!",
+      });
+    }
+
+    const hashedPass = await bcrypt.hash(password,11);
+
+    const user = await User.create({
+      name,email,password:hashedPass
+    })
+    const token = jwt.sign({ userId: user._id }, process.env.jwt_secret , { expiresIn: '7d' });
+    res.status(201).cookie('token',token).json({
+      success : true,
+      message : "Registered !",
+      user
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success : false,
+      message : error
+    })
+  }
+};

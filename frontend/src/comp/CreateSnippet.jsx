@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateSnippet() {
 
@@ -11,15 +12,18 @@ export default function CreateSnippet() {
 
   const handler = async()=>{
     try {
-      const {data}  = axios.post("/create/snippet",{name,lan,code}, { withCredentials: true});
+     
+      const {data}  =await axios.post("http://localhost:4000/api/v1/snippet/create",{name,lan,code}, { withCredentials: true});
       if(data.success){
+       
         toast.success("Success");
         setcode("");
         setlan("");
         setname("");
+       
       }
     } catch (error) {
-      
+     
     }
   }
 
