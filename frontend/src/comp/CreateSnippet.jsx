@@ -2,6 +2,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, {useState} from 'react'
+import MedAi from './MedAi';
 import { useNavigate } from 'react-router-dom';
 
 export default function CreateSnippet() {
