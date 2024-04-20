@@ -26,8 +26,8 @@ export default function Header() {
         <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
           {isAuth && (
             <>
-            <Link to="/create/snippet" class="mr-5 hover:text-white">Create Snip</Link>
             <Link to="/" class="mr-5 hover:text-white">My Snip</Link>
+            <Link to="/create/snippet" class="mr-5 hover:text-white">Create Snip</Link>
             <Link to='/add/snippet' class="mr-5 hover:text-white">Add Snip</Link>
             <Link to='/update/snippet/66235969d0c8714569afef50' class="mr-5 hover:text-white">Edit Snip</Link>
             <a class="mr-5 hover:text-white">Default Snip</a>
@@ -45,9 +45,9 @@ export default function Header() {
           {
             user!=null && (
               <>
-          <button
+          <button 
           onClick={handler}
-           class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">Logout
+           class="inline-flex hover:bg-red-900 items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0">Logout
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>

@@ -1,74 +1,100 @@
-import React, { useEffect,useState } from 'react'
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function MySnipptes() {
   const navigate = useNavigate();
-  const {isAuth,user} = useSelector((store) => store.user);
+  const { isAuth, user } = useSelector((store) => store.user);
+  const [load, setLoad] = useState(false);
+  const [snips, setsnips] = useState([]);
 
-  const [snips,setsnips] = useState([]);
-
-  useEffect(()=>async()=>{
-    if(isAuth===false){
-      navigate('/')
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+  };
+  const handler = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:4000/api/v1/snippet/delete/${id}`,
+        { withCredentials: true }
+      );
+      toast.success("Deleted Successfully!");
+      setLoad(!load);
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
-    else{
-      const {data}  = await axios.get("http://localhost:4000/api/v1/snippet/get", { withCredentials: true});
-      setsnips(data);
-    }
-  },[])
-
-  
+  };
+  useEffect(
+    () => async () => {
+      if (isAuth === false) {
+        navigate("/");
+      } else {
+        const { data } = await axios.get(
+          "http://localhost:4000/api/v1/snippet/get",
+          { withCredentials: true }
+        );
+        setsnips(data);
+        console.log(data);
+      }
+    },
+    [load]
+  );
 
   return (
     <div>
+      <ToastContainer />
       <div>
-    <div class="flex flex-col text-center w-full mb-12">
-      <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">All Snippets</h1>
-    </div>
-    <section class="text-gray-400 bg-gray-900 body-font">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-    {(snips)  ? (
-            <>
-            {snips.map((item)=>{
-              return (
+        <div class="flex flex-col text-center w-full mb-12">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 pt-12 text-white">
+            All Snippets
+          </h1>
+        </div>
+        <section class="text-gray-400 bg-gray-900 body-font">
+          <div class="container px-5 py-8 mx-auto">
+            <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+              {snips ? (
                 <>
-               {item.name}
-               {item.code}
-               {item.lan}
+                  {snips.map((item) => {
+                    return (
+                      <>
+                        <div class="p-2 sm:w-1/2 w-full">
+                          <div class="bg-gray-800 rounded flex justify-between p-4 h-full items-center">
+                            <div>
+                            <button
+                              title="Copy"
+                              onClick={() => copyToClipboard(item.code)}
+                              >
+                              <i class="fa-solid fa-copy text-xl px-2 text-yellow-500 hover:text-blue-500"></i>
+                            </button>
+                            <span class="title-font font-medium text-white">
+                              {item.name + "(" + item.lan + ")"}{" "}
+                            </span>
+                            </div>
+                            <div >
+                            <Link to={`/update/snippet/${item._id}`}><i class="fa-solid px-2 hover:text-orange-600 fa-pen-to-square"></i></Link>
+                            <button
+                              onClick={() => {
+                                handler(item._id);
+                              }}
+                              >
+                              <i class="fa-solid fa-trash hover:text-red-700"></i>
+                            </button>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    );
+                  })}
                 </>
-              )
-            })}
-            </>
-          ) : (
-            <p> loading </p>
-          )}
-      
+              ) : (
+                <p> Loading </p>
+              )}
+            </div>
+          </div>
+        </section>
       </div>
-      <div class="p-2 sm:w-1/2 w-full">
-        <div class="bg-gray-800 rounded flex p-4 h-full items-center">
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-indigo-400 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
-            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-            <path d="M22 4L12 14.01l-3-3"></path>
-          </svg>
-          <span class="title-font font-medium text-white">Kinfolk Chips Snackwave</span>
-        </div>
-      </div>
-      <div class="p-2 sm:w-1/2 w-full">
-        <div class="bg-gray-800 rounded flex p-4 h-full items-center">
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" class="text-indigo-400 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
-            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-            <path d="M22 4L12 14.01l-3-3"></path>
-          </svg>
-          <span class="title-font font-medium text-white">Coloring Book Ethical</span>
-        </div>
-      </div>
-     </div>
-</section>
-
     </div>
-    </div>
-  )
+  );
 }
