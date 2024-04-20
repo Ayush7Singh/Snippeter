@@ -24,10 +24,9 @@ exports.addSnippet = async (req, res) => {
 };
 
 
-exports.getSnippet = async (req, res) => {
+exports.getAllSnippet = async (req, res) => {
   try {
-    const { id } = req.body;
-    const getSnippet =await Snippet.findById(id);
+    const getSnippet =await Snippet.find();
     if (getSnippet) {
       return res.json(getSnippet);
     }
