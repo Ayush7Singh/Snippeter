@@ -10,10 +10,13 @@ export default function MySnipptes() {
   const { isAuth, user } = useSelector((store) => store.user);
   const [load, setLoad] = useState(false);
   const [snips, setsnips] = useState([]);
+  const [search, setSearch] = useState('');
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
   };
+  
+
   const handler = async (id) => {
     try {
       const { data } = await axios.delete(
@@ -46,17 +49,28 @@ export default function MySnipptes() {
     <div>
       <ToastContainer />
       <div>
-        <div class="flex flex-col text-center w-full mb-12">
+        <div class="flex flex-col mx-auto text-center w-full mb-12">
           <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 pt-12 text-white">
             All Snippets
           </h1>
+         
+             <input type="text" onChange={(e)=>setSearch(e.target.value)} placeholder="Search Snippets"
+             class="w-1/4 mx-auto bg-gray-100 bg-opacity-10 text-center rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            />
+           
         </div>
         <section class="text-gray-400 bg-gray-900 body-font">
           <div class="container px-5 py-8 mx-auto">
             <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
               {snips ? (
                 <>
-                  {snips.map((item) => {
+                
+                  {snips
+                  .filter((val)=>{
+                    if(search===""){return val;}
+                    else if(val.name.toLowerCase().includes(search.toLowerCase())){return val;}
+                  })
+                  .map((item) => {
                     return (
                       <>
                         <div class="p-2 sm:w-1/2 w-full">
