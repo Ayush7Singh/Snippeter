@@ -33,7 +33,6 @@ export default function Home() {
       }   
     }else{ //login user
       const details = { email, password : pass};
-      console.log(details);
       try {
         dispatch({
           type : USER_LOGIN_REQUEST

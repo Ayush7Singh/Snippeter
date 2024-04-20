@@ -28,6 +28,7 @@ function App() {
       }
     },[dispatch])
   return (
+    <div className="min-h-screen flex flex-col">
     <Router >
       <Header />
         <Routes>
@@ -38,6 +39,7 @@ function App() {
         </Routes>
       <Footer />
     </Router>
+    </div>
   );
 }
 

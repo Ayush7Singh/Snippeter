@@ -31,7 +31,7 @@ export default function CreateSnippet() {
     <MedAi/>
     <div>
       <section class="text-gray-400 bg-gray-900 body-font relative">
-  <div class="container px-5 py-24 mx-auto">
+  <div class="container px-5 py-20 mx-auto">
     <div class="flex flex-col text-center w-full mb-12">
       <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Create Snippet</h1>
     </div>
