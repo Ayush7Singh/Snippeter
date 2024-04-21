@@ -132,6 +132,44 @@ exports.addSnippetOther = async(req,res)=>{
 
 
 
+
+
+
+exports.allSnips = async(req,res)=>{
+  try {
+    const snips = await Snippet.find();
+    return res.status(200).json({
+      success : true,
+      snips
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.exploreAdd = async(req,res)=>{
+  try {
+    const snippet = await Snippet.findById(req.body.id);
+    const newSnippet = await Snippet.create({
+      code : snippet.code,
+      lan : snippet.lan,
+      name : snippet.name,
+      user : req.body.user
+    })
+    snippet.shareCount +=1 ;
+    await snippet.save();
+    return res.status(200).json({
+      success : true,
+      message : "Added Successfully!",
+      newSnippet
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
 exports.allSnips = async(req,res)=>{
   try {
     const snips = await Snippet.find();

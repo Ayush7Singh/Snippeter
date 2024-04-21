@@ -5,6 +5,7 @@ const { authenticateUser } = require('../middleware/authentication');
 
 const { addSnippet , exploreAdd,allSnips,getAllSnippet,getSnip, addSnippetOther,updateSnippet, dropSnippet}=require('../controllers/snippetController');
 const { compilerFunc } = require('../controllers/compilerController');
+const { addSnippet ,getAllSnippet,getSnip, addSnippetOther,updateSnippet, dropSnippet, Search}=require('../controllers/snippetController');
 
 
 
@@ -24,5 +25,6 @@ router.route('/snippet/delete/:id').delete(authenticateUser,dropSnippet);
 router.route('/allsnip').get(allSnips);
 router.route('/compile').post(compilerFunc)
 router.route('/explore/add').post(authenticateUser,exploreAdd);
+
 
 module.exports = router;  
