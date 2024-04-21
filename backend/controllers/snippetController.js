@@ -172,7 +172,8 @@ exports.exploreAdd = async(req,res)=>{
 
 exports.allSnips = async(req,res)=>{
   try {
-    const snips = await Snippet.find();
+    let snips = await Snippet.find();
+    snips = snips.filter((item)=> item.user != req.body.user);
     return res.status(200).json({
       success : true,
       snips

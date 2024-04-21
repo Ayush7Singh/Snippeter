@@ -30,10 +30,21 @@ export default function Compiler() {
        
         <div class="p-2 w-full">
           <div class="relative">
-            <label for="message" class="leading-7 text-sm text-gray-400">Code</label>
+            <div className='flex flex-row justify-between'>
+              <label for="message" class="leading-7 text-sm text-gray-400">Code </label>
+              <div>
+                <select className='bg-gray-700 rounded-md'>
+                  <option>Python</option>
+                  <option>Java</option>
+                  <option>C++</option>
+                </select>
+              </div>
+            </div>
             <textarea onChange={(e)=>setCode(e.target.value)} id="message" name="message" class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-red-500 focus:bg-gray-900 focus:ring-2 focus:ring-red-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
           </div>
         </div>
+
+
         <div class="p-2 w-full">
           <div class="relative">
             <label for="message" class="leading-7 text-sm text-gray-400">Input</label>

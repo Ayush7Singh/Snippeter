@@ -5,11 +5,13 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Explore() {
 
   const [allSnips, setAllSnips] = useState([]);
+  const [val , setVal] = useState(false);
 
   const addHandler = async(id)=>{
     try {
       const {data}  = await axios.post("http://localhost:4000/api/v1/explore/add", {id} ,{ withCredentials: true});
       toast.success("Added Successfully")
+      setVal(!val);
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -25,7 +27,7 @@ export default function Explore() {
     } catch (error) {
       toast.error(error.response.data.message);
     }
-  },[])
+  },[val])
 
   return (
     <div>

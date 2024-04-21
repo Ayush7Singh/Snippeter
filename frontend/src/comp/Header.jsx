@@ -45,6 +45,7 @@ export default function Header() {
           {
             user!=null && (
               <>
+              <span title='User' className='m-1 rounded-lg hover:text-white font-semibold bg-orange-500 text-black p-1'>{user.name}</span>
           <button 
           onClick={handler}
            class="inline-flex hover:bg-red-900 items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0">Logout
