@@ -10,6 +10,8 @@ import MySnipptes from "./comp/MySnipptes.jsx";
 import CreateSnippet from "./comp/CreateSnippet.jsx";
 import AddOthers from "./comp/AddOthers.jsx";
 import UpdateSnippet from "./comp/Updatesnippet.jsx"
+import Compiler from "./comp/Compiler.jsx";
+import Explore from "./comp/Explore.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +41,8 @@ function App() {
           <Route path='/add/snippet' element={<AddOthers/>} />
           <Route path='/update/snippet/:id' element={<UpdateSnippet/>} />
           <Route path="/create/snippet" element={<CreateSnippet />} />
+          <Route path='/compiler' element={<Compiler/>} />
+          <Route path='/explore/snippets' element={<Explore/>} />
         </Routes>
       <Footer />
     </Router>

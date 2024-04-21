@@ -13,6 +13,7 @@ export default function MySnipptes() {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
+    toast.success("Copied Successfully!")
   };
   const handler = async (id) => {
     try {
@@ -73,7 +74,8 @@ export default function MySnipptes() {
                             </span>
                             </div>
                             <div >
-                            <Link to={`/update/snippet/${item._id}`}><i class="fa-solid px-2 hover:text-orange-600 fa-pen-to-square"></i></Link>
+                            <i title = "share" onClick={()=>copyToClipboard(item._id)} class="fa-solid hover:text-white fa-share"></i>
+                            <Link title="edit" to={`/update/snippet/${item._id}`}><i class="fa-solid px-2 hover:text-orange-600 fa-pen-to-square"></i></Link>
                             <button
                               onClick={() => {
                                 handler(item._id);

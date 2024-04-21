@@ -3,7 +3,8 @@ const router = express.Router();
 const {register, profile,login,getUserDetails,logout} = require('../controllers/userController');
 const { authenticateUser } = require('../middleware/authentication');
 
-const { addSnippet ,getAllSnippet,getSnip, addSnippetOther,updateSnippet, dropSnippet}=require('../controllers/snippetController');
+const { addSnippet , exploreAdd,allSnips,getAllSnippet,getSnip, addSnippetOther,updateSnippet, dropSnippet}=require('../controllers/snippetController');
+const { compilerFunc } = require('../controllers/compilerController');
 
 
 
@@ -13,11 +14,15 @@ router.route('/user/logout').get(logout);
 router.route('/profile').get(authenticateUser,profile);
 router.route("/me").get(authenticateUser, getUserDetails);
 
-router.route('/snippet/create').post(addSnippet);
-router.route('/add/snippet').post(addSnippetOther);
-router.route('/snippet/get').get(getAllSnippet);
-router.route("/snippet/get/:id").get(getSnip);
-router.route('/snippet/update/:id').post(updateSnippet);
-router.route('/snippet/delete/:id').delete(dropSnippet);
+router.route('/snippet/create').post(authenticateUser,addSnippet);
+router.route('/add/snippet').post(authenticateUser,addSnippetOther);
+router.route('/snippet/get').get(authenticateUser,getAllSnippet);
+router.route("/snippet/get/:id").get(authenticateUser,getSnip);
+router.route('/snippet/update/:id').post(authenticateUser,updateSnippet);
+router.route('/snippet/delete/:id').delete(authenticateUser,dropSnippet);
+
+router.route('/allsnip').get(allSnips);
+router.route('/compile').post(compilerFunc)
+router.route('/explore/add').post(authenticateUser,exploreAdd);
 
 module.exports = router;  

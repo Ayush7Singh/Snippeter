@@ -3,10 +3,9 @@ const mongoose = require('mongoose')
 
 exports.addSnippet = async (req, res) => {
   try {
-    const { name,lan, code } = req.body;
-  
+    const { name,lan,code,user } = req.body;
     const Snip = await Snippet.create({
-      name,lan,code
+      name,lan,code, user
     })
     res.status(500).json({
       success : true,
@@ -27,7 +26,7 @@ exports.addSnippet = async (req, res) => {
 
 exports.getAllSnippet = async (req, res) => {
   try {
-    const getSnippet =await Snippet.find();
+    const getSnippet =await Snippet.find({user : req.body.user});
     if (getSnippet) {
       return res.json(getSnippet);
     }
@@ -48,7 +47,6 @@ exports.getSnip = async (req, res) => {
     const id= req.params.id;
     console.log(id)
     const resi = await Snippet.findById(id);
-    console.log(resi);
     if (resi) {
       return res.json(resi);
     }
@@ -68,7 +66,6 @@ exports.updateSnippet =async(req,res)=>{
     const id= req.params.id;
     const {name,lan, code} = req.body;
     const updatedSnippet = await Snippet.findById(id);
-    console.log(updatedSnippet)
     updatedSnippet.code=code;
     updatedSnippet.lan=lan;
     updatedSnippet.name=name;
@@ -114,8 +111,10 @@ exports.addSnippetOther = async(req,res)=>{
   try {
     const {name, id} = req.body;
     const oldSnip = await Snippet.findById(id);
+    oldSnip.shareCount+=1;
+    await oldSnip.save();
     const newSnip = await Snippet.create({
-      name, lan : oldSnip.lan, code : oldSnip.code
+      name, lan : oldSnip.lan, code : oldSnip.code, user : req.body.user
     })
     return res.status(200).json({
       messsage : "Added Successfully",
@@ -133,3 +132,35 @@ exports.addSnippetOther = async(req,res)=>{
 
 
 
+exports.allSnips = async(req,res)=>{
+  try {
+    const snips = await Snippet.find();
+    return res.status(200).json({
+      success : true,
+      snips
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+exports.exploreAdd = async(req,res)=>{
+  try {
+    const snippet = await Snippet.findById(req.body.id);
+    const newSnippet = await Snippet.create({
+      code : snippet.code,
+      lan : snippet.lan,
+      name : snippet.name,
+      user : req.body.user
+    })
+    snippet.shareCount +=1 ;
+    await snippet.save();
+    return res.status(200).json({
+      success : true,
+      message : "Added Successfully!",
+      newSnippet
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
