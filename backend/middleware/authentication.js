@@ -6,14 +6,14 @@ exports.authenticateUser = (req,res,next)=>{
   if(!token){
     return res.status(401).json({
       success : false,
-      message : "Unautorized"
+      message : "Unauthorized"
     })
   }
   jwt.verify(token,process.env.jwt_secret,(error,decodedToken)=>{
     if(error){
       return res.status(401).json({
         success : false,
-        message : "Unautorized!"
+        message : "Unauthorized!"
       })
     }
     req.body.user = decodedToken.userId;

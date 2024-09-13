@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { USER_LOAD_FAIL,USER_LOAD_SUCCESS,USER_LOAD_REQUEST } from "./constants/user.js";
@@ -32,7 +32,7 @@ function App() {
       }
     },[dispatch])
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="w-96 mx-auto">
     <Router >
       <Header />
         <Routes>
@@ -44,7 +44,7 @@ function App() {
           <Route path='/compiler' element={<Compiler/>} />
           <Route path='/explore/snippets' element={<Explore/>} />
         </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
     </div>
   );

@@ -8,8 +8,9 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 
 app.use(cors({
-  origin : 'http://localhost:3000',
-  credentials : true,
+  origin: ['http://localhost:3000', 'chrome-extension://jknlnahjcdcbdlngkfilcaahfbghhbib'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
 }));
 app.use(express.json({
   limit: '50mb'

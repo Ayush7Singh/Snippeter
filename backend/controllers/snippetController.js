@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 exports.addSnippet = async (req, res) => {
   try {
+    console.log(req.body)
     const { name,lan,code,user } = req.body;
     const Snip = await Snippet.create({
       name,lan,code, user
