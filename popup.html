@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Code Snippet Manager</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>Snippeter</h1>
+  <button id="add-snippet">Add Snippet</button>
+  <input type="text" id="search" placeholder="Search snippets...">
+  <div id="snippet-list"></div>
+  <div id="snippet-editor" style="display:none;">
+    <h2>Edit Snippet</h2>
+    <input type="text" id="snippet-title" placeholder="Title">
+    <textarea id="snippet-code" placeholder="Code"></textarea>
+    <button id="save-snippet">Save</button>
+    <button id="cancel-edit">Cancel</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
