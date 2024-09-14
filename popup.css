@@ -79,7 +79,16 @@ body {
     font-size: 11px;
     padding: 0px 0px;
     margin: 0px 0px;
+    width: 67%;       /* Set width */
+    height: 50px;      /* Set height */
+    overflow: auto;     /* Add scrollbars if needed */
+    border: 1px solid #ccc; 
   }
+  .snipper pre::-webkit-scrollbar {
+    width: 8px;         /* Width of vertical scrollbar */
+    height: 8px;        /* Height of horizontal scrollbar */
+}
+
   .snipperedit{
     display: flex;
     justify-content: space-around;
