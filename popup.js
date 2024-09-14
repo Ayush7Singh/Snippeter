@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const snippetList = document.getElementById('snippet-list');
     const searchInput = document.getElementById('search');
+    const friendInput = document.getElementById('addfriendsnip');
     const addButton = document.getElementById('add-snippet');
     const snippetEditor = document.getElementById('snippet-editor');
     const snippetTitleInput = document.getElementById('snippet-title');
@@ -40,6 +41,26 @@ document.addEventListener('DOMContentLoaded', () => {
         snippetEditor.style.display = 'none';
       }
     });
+      // Add friends snippets
+      friendInput.addEventListener('input', () => {
+        const query = friendInput.value;
+        const decodedSnippet = JSON.parse(atob(query));
+        const title = decodedSnippet.title.trim();
+      const code = decodedSnippet.code.trim();
+      if (title && code) {
+        if (editingIndex === -1) {
+          // Add new snippet
+          saveSnippet(title, code);
+         // friendInput.value='';
+        } 
+      }
+        console.log(decodedSnippet)
+      });
+
+    
+        friendInput.addEventListener('blur', ()=>{
+          friendInput.value='';
+        });
   
     // Cancel editing
     cancelButton.addEventListener('click', () => {
@@ -57,18 +78,22 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSnippets(filteredSnippets);
       });
     });
+
+   
   
     // Render snippets
     function renderSnippets(snippets) {
       snippetList.innerHTML = snippets.map((snippet, index) => `
         <div class="snippet">
+        <div class="snipper">
           <h2>${snippet.title}</h2>
-          <pre>${snippet.code}</pre>
+          <pre>${snippet.code}</pre></div>
+          <div class="snipperedit">
           <button class="copy-btn" data-index="${index}">Copy</button>
           <button class="edit-btn" data-index="${index}">Edit</button>
           <button class="delete-btn" data-index="${index}">Delete</button>
           <button class="share-btn" data-index="${index}">Share</button>
-        </div>
+        </div></div>
       `).join('');
   
       // Attach event listeners to newly added buttons
@@ -105,9 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateShareableLink(index) {
         loadSnippets((snippets) => {
           const snippet = snippets[index];
-          const encodedSnippet = JSON.stringify(snippet);
-          const shareLink = `http://127.0.0.1:5500/share/index.html?data=${encodedSnippet}`;
-          prompt('Copy this link to share with your friend:', shareLink);
+          const encodedSnippet = btoa(JSON.stringify(snippet));
+          const shareLink = `${encodedSnippet}`;
+          navigator.clipboard.writeText(shareLink).then(() => {
+            alert('Snippet copied to clipboard!');
+          })
         });
       }
   

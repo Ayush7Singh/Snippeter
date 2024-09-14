@@ -1,29 +1,91 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     width: 300px;
     padding: 10px;
+    background-color: #d1d5db;
   }
   
   h1 {
     font-size: 18px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
   }
   
   button {
     margin: 5px;
+    padding: 7px;
+    color: white;
+    border: none;
+    background-color: #10B981;
+    border-radius: 5px;
+    font-size: 12px;
+
   }
-  
+  button:hover{
+    background-color: #0f976a;
+  }
+  #search{
+    display: flex;
+    margin: 4px auto;
+  }
+  input{
+    margin: 5px;
+    padding: 7px;
+    border: none;
+    border-radius: 5px;
+    color: rgba(0, 0, 0, 0.662);
+    font-size: 12px;
+  }
+  input:focus {
+    outline: none;
+}
+.adder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
   textarea {
-    width: 100%;
+    width: 90%;
     height: 100px;
+    margin: 5px 5px;
+    padding: 7px;
+    border: none;
+    border-radius: 5px;
+    color: rgba(0, 0, 0, 0.662);
+    font-size: 12px;
+
   }
+  textarea:focus {
+    outline: none;
+}
   
   .snippet {
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
+    border-bottom: 1px solid #737070;
+    padding: 4px;
   }
-  
+  .snipper{
+    display:flex;
+    align-items: center;
+    padding: 5px;
+  }
+  .snipper h2{
+    padding: 0px 0px;
+    margin:0px 0px;
+    width: 33%;
+
+  }
+  .snipper pre{
+    font-size: 11px;
+    padding: 0px 0px;
+    margin: 0px 0px;
+  }
+  .snipperedit{
+    display: flex;
+    justify-content: space-around;
+  }
   #snippet-editor {
-    padding: 10px;
+    padding: 4px;
     border: 1px solid #ccc;
   }
   
